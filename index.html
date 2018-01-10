@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -215,6 +215,131 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/10/iOS-唯一识别id/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kevin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/10/iOS-唯一识别id/" itemprop="url">iOS 唯一识别id</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T15:15:27+08:00">
+                2018-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>####关于iOS的设备标识，历史上有多个方法，取不同的ID，有些方法已经被苹果禁止，所以现在开发也不需要去看了，广告标识符可能会取不到（用户可以自己去设备设置中关闭，建议关闭，能少收集一个是一个），主要说下目前我认为最好的解决方案</p>
+<p>######首先说一下最简单的方法，很多公司在用这个，但是有缺陷，就是相同开发商的多个应用返回的值是一样的，除非真的有这种需求，否则不建议用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[UIDevice currentDevice]identifierForVendor].UUIDString</span><br></pre></td></tr></table></figure></p>
+<p>######Apple的注释很清楚<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property(nullable, nonatomic,readonly,strong) NSUUID      *identifierForVendor NS_AVAILABLE_IOS(6_0);      // a UUID that may be used to uniquely identify the device, same across apps from a single vendor.</span><br></pre></td></tr></table></figure></p>
+<p>######所以这个方法一般不会用，那就用到了CFUUIDRef<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (NSString *)uuidString</span><br><span class="line">&#123;</span><br><span class="line">    CFUUIDRef uuid_ref = CFUUIDCreate(NULL);</span><br><span class="line">    CFStringRef uuid_string_ref= CFUUIDCreateString(NULL, uuid_ref);</span><br><span class="line">    NSString *uuid = [NSString stringWithString:(__bridge NSString *)uuid_string_ref];</span><br><span class="line">    CFRelease(uuid_ref);</span><br><span class="line">    CFRelease(uuid_string_ref);</span><br><span class="line">    return [uuid lowercaseString];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>######这样生成的uuid会每次变化，所以需要存储，对于存储的方法，建议存在NSUserDefaults或者数据库中，然后同时存到keychain中，每次从NSUserDefaults读取，取不到再去keychain中查找，都没有才生成新的并存储，这样可以保证卸载了app重新安装后设备号还是不变的，但如果重置系统，那就没有办法了，还有一种方法是上传iCloud，但会有很多限制和不确定，所以没有用。但其实iCloud可以做很多事情，大家可以试试。</p>
+<p>编辑人：kevin 转载请注明，谢谢</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -258,7 +383,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T10:21:08+08:00">
                 2018-01-10
@@ -385,7 +510,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T10:15:35+08:00">
                 2018-01-10
@@ -512,7 +637,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-09T15:32:21+08:00">
                 2018-01-09
@@ -644,8 +769,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -695,7 +820,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
