@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kevin">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="###ios 9.0后，新出了通讯录读取的api，CNContactStore，介绍下简单的使用 ####首先导入模块1@import Contacts; ####请求权限1234567891011121314- (void)requestContactAuthorization &amp;#123;    CNAuthorizationStatus status = [CNContactStore au">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 9.0 CNContactStore">
+<meta property="og:url" content="http://yoursite.com/2018/01/10/iOS-9-0-CNContactStore/index.html">
 <meta property="og:site_name" content="Kevin">
+<meta property="og:description" content="###ios 9.0后，新出了通讯录读取的api，CNContactStore，介绍下简单的使用 ####首先导入模块1@import Contacts; ####请求权限1234567891011121314- (void)requestContactAuthorization &amp;#123;    CNAuthorizationStatus status = [CNContactStore au">
 <meta property="og:locale" content="zn-Hans">
+<meta property="og:updated_time" content="2018-01-10T02:45:55.947Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kevin">
+<meta name="twitter:title" content="iOS 9.0 CNContactStore">
+<meta name="twitter:description" content="###ios 9.0后，新出了通讯录读取的api，CNContactStore，介绍下简单的使用 ####首先导入模块1@import Contacts; ####请求权限1234567891011121314- (void)requestContactAuthorization &amp;#123;    CNAuthorizationStatus status = [CNContactStore au">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/10/iOS-9-0-CNContactStore/"/>
 
 
 
 
 
-  <title>Kevin</title>
+  <title>iOS 9.0 CNContactStore | Kevin</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/10/iOS-9-0-CNContactStore/" itemprop="url">iOS 9.0 CNContactStore</a></h1>
+          <h1 class="post-title" itemprop="name headline">iOS 9.0 CNContactStore</h1>
         
 
         <div class="post-meta">
@@ -298,9 +299,7 @@
       
 
       
-        
-          
-            <p>###ios 9.0后，新出了通讯录读取的api，CNContactStore，介绍下简单的使用</p>
+        <p>###ios 9.0后，新出了通讯录读取的api，CNContactStore，介绍下简单的使用</p>
 <p>####首先导入模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@import Contacts;</span><br></pre></td></tr></table></figure></p>
 <p>####请求权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (void)requestContactAuthorization &#123;</span><br><span class="line">    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];</span><br><span class="line">    CNContactStore *contactStore = [[CNContactStore alloc]init];</span><br><span class="line">    if (status == CNAuthorizationStatusAuthorized) &#123;</span><br><span class="line">        [self loadContact];//读取操作</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        [contactStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) &#123;</span><br><span class="line">        //可以设置成功后再执行下一步操作</span><br><span class="line">        if (granted)&#123;</span><br><span class="line">                [self loadContact];//读取操作</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>####读取需要使用CNContactFetchRequest进行请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">- (void)loadContact&#123;</span><br><span class="line">    CNContactStore *contactStore = [[CNContactStore alloc]init];</span><br><span class="line">    NSLog(@&quot;!!!!!!!!start date:%f&quot;,[[NSDate date] timeIntervalSince1970]*1000.0f);</span><br><span class="line"></span><br><span class="line">    NSArray *keys = @[CNContactGivenNameKey,CNContactFamilyNameKey,CNContactPhoneNumbersKey];</span><br><span class="line">    CNContactFetchRequest *request = [[CNContactFetchRequest alloc]initWithKeysToFetch:keys];</span><br><span class="line">    __block NSInteger count = 0;</span><br><span class="line">    [contactStore enumerateContactsWithFetchRequest:request error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        NSString *lastname = contact.familyName;</span><br><span class="line">        NSString *firstname = contact.givenName;</span><br><span class="line">        NSLog(@&quot;%@ %@&quot;, lastname, firstname);</span><br><span class="line">        </span><br><span class="line">        // 2.获取联系人的电话号码</span><br><span class="line">        NSArray *phoneNums = contact.phoneNumbers;</span><br><span class="line">        for (CNLabeledValue *labeledValue in phoneNums) &#123;</span><br><span class="line">            // 2.1.获取电话号码的KEY</span><br><span class="line">            NSString *phoneLabel = labeledValue.label;</span><br><span class="line">            </span><br><span class="line">            // 2.2.获取电话号码</span><br><span class="line">            CNPhoneNumber *phoneNumer = labeledValue.value;</span><br><span class="line">            NSString *phoneValue = phoneNumer.stringValue;</span><br><span class="line">            </span><br><span class="line">            NSLog(@&quot;%@ %@&quot;, phoneLabel, phoneValue);</span><br><span class="line">        &#125;</span><br><span class="line">        NSLog(@&quot;!!!!!!!num:%ld end date:%f&quot;,(long)count,[[NSDate date] timeIntervalSince1970]*1000.0f);</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -309,8 +308,6 @@
 <p>####切记是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NS_CLASS_AVAILABLE(10_11, 9_0)</span><br></pre></td></tr></table></figure></p>
 <p>编辑人：kevin<br>转发请注明</p>
 
-          
-        
       
     </div>
     
@@ -327,139 +324,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/10/iOS-AirPrint/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kevin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kevin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/10/iOS-AirPrint/" itemprop="url">iOS AirPrint</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T10:15:35+08:00">
-                2018-01-10
-              </time>
+              <a href="/2018/01/10/iOS-AirPrint/" rel="next" title="iOS AirPrint">
+                <i class="fa fa-chevron-left"></i> iOS AirPrint
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>#最近做了个小需求，为了以后查阅方便写下这篇文章<br>主要介绍ios通过wifi连接打印机，调用api打印<br>苹果内置了print的api，直接调用就可使用，大多数打印机厂商都有支持，开发者不需要根据打印机去适配，这点很方便，不像安卓，需要安装插件才能使用</p>
-<p>####首先，需要设置代理代理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIPrintInteractionControllerDelegate</span><br></pre></td></tr></table></figure></p>
-<p>####创建打印界面的viewcontroller<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UIPrintInteractionController *printer =[UIPrintInteractionController sharedPrintController];</span><br><span class="line">printer.delegate = self;</span><br></pre></td></tr></table></figure></p>
-<p>####配置打印信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">UIPrintInfo *Pinfo = [UIPrintInfo printInfo];</span><br><span class="line"></span><br><span class="line">Pinfo.outputType = UIPrintInfoOutputGeneral;//可打印文本、图形、图像</span><br><span class="line"></span><br><span class="line">Pinfo.jobName = @&quot;Print for Kevin. &quot;;//可选属性，用于在打印中心中标识打印作业</span><br><span class="line"></span><br><span class="line">Pinfo.duplex = UIPrintInfoDuplexLongEdge;//双面打印绕长边翻页，NONE为禁止双面</span><br><span class="line"></span><br><span class="line">Pinfo.orientation = UIPrintInfoOrientationPortrait;//打印纵向还是横向</span><br></pre></td></tr></table></figure></p>
-<p>####给打印控制器制定信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printer.printInfo = Pinfo;</span><br></pre></td></tr></table></figure></p>
-<p>####读取需要打印的pdf，支持图片和pdf（其他的没有试过）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;test010&quot; ofType:@&quot;pdf&quot;];</span><br><span class="line"></span><br><span class="line">NSString *path1 = [[NSBundle mainBundle] pathForResource:@&quot;test020&quot; ofType:@&quot;pdf&quot;];</span><br><span class="line"></span><br><span class="line">printer.printingItems = @[[NSURL fileURLWithPath:path],[NSURL fileURLWithPath:path1],];</span><br><span class="line"></span><br><span class="line">//    printer.printingItems = @[[UIImage imageNamed:@&quot;test001&quot;], [UIImage imageNamed:@&quot;test002&quot;],];</span><br><span class="line"></span><br><span class="line">printer.showsPageRange = NO;</span><br><span class="line"></span><br><span class="line">[printer presentAnimated:YES completionHandler:^(UIPrintInteractionController * _Nonnull printInteractionController, BOOL completed, NSError * _Nullable error) &#123;</span><br><span class="line"></span><br><span class="line">        if (!completed &amp;&amp; error) &#123;</span><br><span class="line"></span><br><span class="line">            NSLog(@&quot;Error&quot;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;];</span><br></pre></td></tr></table></figure></p>
-<p>至此，基本的打印就结束了，打印界面可以选择wifi环境下的打印机，测试demo用的佳能的打印机，wifi是打印机建立的热点，也可以把打印机配置到自己的wifi中（较复杂）。</p>
-<p>【编辑人员：kevin<br>转发请注明，谢谢】</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -469,138 +355,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kevin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kevin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/09/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-09T15:32:21+08:00">
-                2018-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -608,6 +367,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -804,6 +567,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
